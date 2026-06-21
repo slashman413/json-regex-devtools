@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON 格式化 + 正則測試 | Free JSON Formatter & Regex Tester</title>
+<meta name="description" content="免費線上開發者工具：JSON 格式化/壓縮/驗證 + 正則表達式測試（即時 highlight 比對結果）。所有運算都在瀏覽器本機，不上傳。Free online JSON formatter/validator & regex tester — runs locally in your browser.">
+<meta property="og:title" content="JSON 格式化 + 正則測試 | Dev Tools">
+<meta property="og:description" content="JSON 格式化/驗證 + 正則測試，本機運算不上傳。">
+<meta name="google-site-verification" content="jV8Xt5l-peRpLknp7xKYpvN8N5tCAkMctq0D-3RVyzk">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5115666613619890" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MY95FHB8JG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MY95FHB8JG');</script>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0f;color:#e8e8f0;min-height:100vh;padding:28px 16px 56px;line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto}
+  .topbar{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .topbar h1{font-size:18px;font-weight:700;flex:1}
+  .lang-btn{padding:6px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#c7c7f0;font-size:12px;font-weight:700;cursor:pointer}
+  .sub{color:#7878a0;font-size:13px;margin-bottom:14px}
+  .tabs{display:flex;gap:8px;margin-bottom:14px}
+  .tab{flex:1;padding:9px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#9a9ac0;font-size:13.5px;font-weight:700;cursor:pointer}
+  .tab.on{background:rgba(99,102,241,.25);color:#c7c7f0;border-color:rgba(99,102,241,.4)}
+  .panel{display:none}.panel.on{display:block}
+  textarea{width:100%;background:#101018;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#e8e8f0;padding:12px;font-size:13px;font-family:ui-monospace,Menlo,monospace;resize:vertical;min-height:130px}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .b{padding:8px 16px;border-radius:9px;border:1px solid rgba(99,102,241,.4);background:rgba(99,102,241,.15);color:#c7c7f0;font-size:13px;font-weight:700;cursor:pointer}
+  .b.ghost{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
+  .msg{font-size:12.5px;padding:8px 10px;border-radius:8px;margin:8px 0;display:none}
+  .msg.ok{display:block;background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.3)}
+  .msg.err{display:block;background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+  .row{display:flex;gap:8px;flex-wrap:wrap}.row>div{flex:1;min-width:120px}
+  input{width:100%;background:#101018;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#e8e8f0;padding:9px;font-size:13px;font-family:ui-monospace,monospace}
+  label{font-size:11px;color:#8888b0;display:block;margin-bottom:4px}
+  .hl{background:#101018;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px;font-size:13px;font-family:ui-monospace,monospace;white-space:pre-wrap;word-break:break-word;margin-top:10px;min-height:60px}
+  mark{background:rgba(99,102,241,.45);color:#fff;border-radius:3px;padding:0 1px}
+  .cnt{font-size:12px;color:#8888b0;margin-top:8px}
+  .ad-slot{width:100%;min-height:90px;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.07);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#303048;margin:16px 0}
+  .aff{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;text-decoration:none;color:inherit}
+  .aff .i{font-size:22px}.aff b{font-size:13px}.aff span{font-size:11px;color:#7878a0;display:block}
+  .note{font-size:10.5px;color:#50506e;margin-top:8px;line-height:1.6}
+  .footer{margin-top:20px;text-align:center;font-size:11px;color:#444466;line-height:1.8}
+  .footer a{color:#6868a0;text-decoration:none}.footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><span style="font-size:24px">🛠️</span><h1 data-i18n="title">JSON 格式化 + 正則測試</h1><button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button></div>
+  <div class="sub" data-i18n="sub">JSON 格式化／壓縮／驗證 + 正則測試。全部在你瀏覽器本機運算，不會上傳資料。</div>
+  <div class="tabs"><button class="tab on" data-t="json" data-i18n="t_json">JSON 格式化</button><button class="tab" data-t="re" data-i18n="t_re">正則測試</button></div>
+
+  <div class="panel on" id="p-json">
+    <textarea id="jin" placeholder='{"hello":"world","n":[1,2,3]}'></textarea>
+    <div class="btns">
+      <button class="b" onclick="jfmt(2)" data-i18n="format">格式化</button>
+      <button class="b ghost" onclick="jfmt(0)" data-i18n="minify">壓縮</button>
+      <button class="b ghost" onclick="jcopy()" data-i18n="copy">複製結果</button>
+    </div>
+    <div class="msg" id="jmsg"></div>
+    <textarea id="jout" readonly placeholder="輸出..."></textarea>
+  </div>
+
+  <div class="panel" id="p-re">
+    <div class="row">
+      <div style="flex:3"><label data-i18n="pattern">Pattern</label><input id="rpat" placeholder="\\b\\w+@\\w+\\.\\w+\\b" value=""></div>
+      <div style="flex:1"><label data-i18n="flags">Flags</label><input id="rflags" value="g" placeholder="gim"></div>
+    </div>
+    <label style="margin-top:10px" data-i18n="teststr">測試字串</label>
+    <textarea id="rtest" placeholder="貼上要比對的文字..."></textarea>
+    <div class="msg" id="rmsg"></div>
+    <div class="cnt" id="rcnt"></div>
+    <div class="hl" id="rhl"></div>
+  </div>
+
+  <ins class="adsbygoogle ad-slot" style="display:block" data-ad-client="ca-pub-5115666613619890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <a class="aff" href="https://www.amazon.com/dp/B0C3HCD34R?tag=ytstories0413-20" target="_blank" rel="nofollow sponsored noopener">
+    <div class="i">🎧</div><div><b data-i18n="hp_t">Soundcore Q20i 降噪耳機</b><span data-i18n="hp_d">寫 code 專注神器</span></div>
+  </a>
+  <div class="note" data-i18n="aff_disc">含 Amazon 聯盟連結，透過連結購買我們可能獲得回饋，不影響你的價格。As an Amazon Associate we earn from qualifying purchases.</div>
+  <div class="footer">
+    <a href="https://slashman413.github.io/" data-i18n="home">← 回 AI工具人首頁</a><br>
+    <a href="https://slashman413.github.io/terms.html" data-i18n="terms">服務說明</a> · <a href="https://slashman413.github.io/privacy.html" data-i18n="privacy">隱私權政策</a>
+  </div>
+</div>
+<script>
+  const $=id=>document.getElementById(id);
+  document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on')); b.classList.add('on'); document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on')); $('p-'+(b.dataset.t==='json'?'json':'re')).classList.add('on'); }));
+  // JSON
+  window.jfmt=(ind)=>{ const m=$("jmsg"); try{ const o=JSON.parse($("jin").value); $("jout").value=JSON.stringify(o,null,ind); m.className='msg ok'; m.textContent=I18N.valid[LANG==='en'?1:0]; }catch(e){ m.className='msg err'; m.textContent=(LANG==='en'?'Invalid JSON: ':'JSON 無效：')+e.message; } };
+  window.jcopy=()=>{ navigator.clipboard.writeText($("jout").value); };
+  // Regex
+  function reRun(){
+    const pat=$("rpat").value, fl=$("rflags").value, str=$("rtest").value, m=$("rmsg");
+    $("rhl").innerHTML=''; $("rcnt").textContent='';
+    if(!pat){ m.className='msg'; return; }
+    let re; try{ re=new RegExp(pat, fl.includes('g')?fl:fl+'g'); m.className='msg'; }catch(e){ m.className='msg err'; m.textContent=(LANG==='en'?'Invalid regex: ':'正則錯誤：')+e.message; return; }
+    let cnt=0, html='', last=0, mm;
+    const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    re.lastIndex=0;
+    while((mm=re.exec(str))!==null){ cnt++; html+=esc(str.slice(last,mm.index))+'<mark>'+esc(mm[0])+'</mark>'; last=mm.index+mm[0].length; if(mm[0]===''){ re.lastIndex++; } if(cnt>5000) break; }
+    html+=esc(str.slice(last));
+    $("rhl").innerHTML=html||'<span style="color:#555">—</span>';
+    $("rcnt").textContent=(LANG==='en'?`${cnt} match(es)`:`找到 ${cnt} 個比對`);
+  }
+  ["rpat","rflags","rtest"].forEach(id=>$(id).addEventListener('input',reRun));
+
+  const I18N={
+    title:["JSON 格式化 + 正則測試","JSON Formatter + Regex Tester"],
+    sub:["JSON 格式化／壓縮／驗證 + 正則測試。全部在你瀏覽器本機運算，不會上傳資料。","Format/validate JSON + test regex. Everything runs locally in your browser — nothing is uploaded."],
+    t_json:["JSON 格式化","JSON"], t_re:["正則測試","Regex"],
+    format:["格式化","Format"], minify:["壓縮","Minify"], copy:["複製結果","Copy"], valid:["✓ JSON 有效","✓ Valid JSON"],
+    pattern:["Pattern","Pattern"], flags:["Flags","Flags"], teststr:["測試字串","Test string"],
+    hp_t:["Soundcore Q20i 降噪耳機","Soundcore Q20i ANC Headphones"], hp_d:["寫 code 專注神器","Focus gear for coding"],
+    aff_disc:["含 Amazon 聯盟連結，透過連結購買我們可能獲得回饋，不影響你的價格。As an Amazon Associate we earn from qualifying purchases.","Contains Amazon affiliate links — at no extra cost to you. As an Amazon Associate we earn from qualifying purchases."],
+    home:["← 回 AI工具人首頁","← Back to AI Toolkit home"], terms:["服務說明","Terms"], privacy:["隱私權政策","Privacy"],
+  };
+  let LANG=localStorage.getItem('site_lang')||'zh';
+  function setLang(l){ LANG=l; const i=l==='en'?1:0; document.querySelectorAll('[data-i18n]').forEach(el=>{ const t=I18N[el.getAttribute('data-i18n')]; if(t) el.textContent=t[i]; }); document.documentElement.lang=l==='en'?'en':'zh-TW'; $("langBtn").textContent=l==='en'?'中':'EN'; localStorage.setItem('site_lang',l); reRun(); }
+  function toggleLang(){ setLang(LANG==='en'?'zh':'en'); } window.toggleLang=toggleLang;
+  setLang(LANG);
+  try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}
+</script>
+</body>
+</html>
