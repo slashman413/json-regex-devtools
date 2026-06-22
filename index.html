@@ -126,6 +126,7 @@
   function toggleLang(){ setLang(LANG==='en'?'zh':'en'); } window.toggleLang=toggleLang;
   setLang(LANG);
   document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();var tb=document.querySelector('.tab.on');if(tb&&tb.dataset.t==='json')jfmt(2);}});
+  document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a');if(!a||!a.href||typeof gtag!=='function')return;var u=a.href;if(u.indexOf('amazon.')>-1)gtag('event','affiliate_click',{link_url:u});else if(u.indexOf('ko-fi.com')>-1)gtag('event','kofi_click',{link_url:u});else if(u.indexOf('youtu')>-1)gtag('event','youtube_click',{link_url:u});else if(u.indexOf('slashman413.github.io')>-1)gtag('event','internal_click',{link_url:u});});
   try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}
 </script>
 </body>
