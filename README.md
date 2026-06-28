@@ -2,7 +2,7 @@
 
 > Format/validate JSON and test regular expressions — **100% free, no signup, runs in your browser.**
 
-**🔗 Live demo: <https://slashman413.github.io/json-regex-devtools/>**
+**🔗 Live demo: <https://slashmantools.us/json-regex-devtools/>**
 
 ## ✨ Features
 - JSON format / validate / minify
@@ -10,7 +10,7 @@
 - Runs entirely locally — data never uploaded
 
 ## 🧰 More free tools
-Part of **[AI工具人 — Free Online Tools](https://slashman413.github.io/tools/)**, a collection of free AI, finance & productivity tools (中／EN).
+Part of **[AI工具人 — Free Online Tools](https://slashmantools.us/tools/)**, a collection of free AI, finance & productivity tools (中／EN).
 
 ---
 Built by [@slashman413](https://github.com/slashman413) · ☕ [Support on Ko-fi](https://ko-fi.com/ytstories0413)
