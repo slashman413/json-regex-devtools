@@ -8,7 +8,10 @@
 <meta name="description" content="免費線上開發者工具：JSON 格式化/壓縮/驗證 + 正則表達式測試（即時 highlight 比對結果）。所有運算都在瀏覽器本機，不上傳。Free online JSON formatter/validator & regex tester — runs locally in your browser.">
 <meta property="og:title" content="JSON 格式化 + 正則測試 | Dev Tools">
 <meta property="og:description" content="JSON 格式化/驗證 + 正則測試，本機運算不上傳。">
-<meta property="og:image" content="https://slashmantools.us/json-regex-devtools/og.png"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://slashmantools.us/json-regex-devtools/og.png">
+<meta property="og:image" content="https://slashmantools.us/json-regex-devtools/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="SlashMan Tools"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://slashmantools.us/json-regex-devtools/og.png">
 <meta name="google-site-verification" content="jV8Xt5l-peRpLknp7xKYpvN8N5tCAkMctq0D-3RVyzk">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7217603696203672" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MY95FHB8JG"></script>
@@ -45,6 +48,12 @@
   .note{font-size:10.5px;color:#50506e;margin-top:8px;line-height:1.6}
   .footer{margin-top:20px;text-align:center;font-size:11px;color:#444466;line-height:1.8}
   .footer a{color:#6868a0;text-decoration:none}.footer a:hover{text-decoration:underline}
+
+  .share-bar{display:flex;align-items:center;gap:6px;margin:10px 0 16px;flex-wrap:wrap}
+  .share-bar .lbl{font-size:11px;color:#55557a;font-weight:600;margin-right:4px;letter-spacing:.5px}
+  .share-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 11px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#9a9ac0;text-decoration:none;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
+  .share-btn:hover{background:rgba(99,102,241,.15);border-color:rgba(99,102,241,.35);color:#c7c7f0}
+  .share-btn.copied{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.35);color:#10b981}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","mainEntity":[{"acceptedAnswer":{"text":"不會，JSON 格式化與正則測試全部在你瀏覽器本機執行。No; JSON formatting and regex testing run entirely in your browser.","@type":"Answer"},"name":"我的資料會被上傳嗎？ / Is my data uploaded?","@type":"Question"},{"acceptedAnswer":{"text":"支援 g/i/m/s/u 等標準 JavaScript 正則旗標。Supports standard JS flags like g, i, m, s, u.","@type":"Answer"},"name":"支援哪些正則 flags？ / Which regex flags?","@type":"Question"},{"acceptedAnswer":{"text":"免費。Free.","@type":"Answer"},"name":"免費嗎？ / Is it free?","@type":"Question"}],"@type":"FAQPage"}</script>
 <link rel="canonical" href="https://slashmantools.us/json-regex-devtools/">
@@ -54,6 +63,16 @@
 <div class="wrap">
   <div class="topbar"><span style="font-size:24px">🛠️</span><h1 data-i18n="title">JSON 格式化 + 正則測試</h1><select class="lang-btn" id="langSel" onchange="setLang(this.value)" aria-label="Language" style="cursor:pointer"><option value="en">EN</option><option value="zh">中</option><option value="es">ES</option><option value="hi">हि</option><option value="ar">ع</option></select></div>
   <div class="sub" data-i18n="sub">JSON 格式化／壓縮／驗證 + 正則測試。全部在你瀏覽器本機運算，不會上傳資料。</div>
+  <div class="share-bar">
+    <span class="lbl">📤 分享</span>
+    <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fslashmantools.us%2Fjson-regex-devtools%2F" target="_blank" rel="noopener" onclick="try{gtag('event','share_facebook')}catch(e){}">📘 FB</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fslashmantools.us%2Fjson-regex-devtools%2F" target="_blank" rel="noopener" onclick="try{gtag('event','share_twitter')}catch(e){}">🐦 X</a>
+    <a class="share-btn" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fslashmantools.us%2Fjson-regex-devtools%2F" target="_blank" rel="noopener" onclick="try{gtag('event','share_line')}catch(e){}">💬 Line</a>
+    <button class="share-btn" onclick="shareLink(this,'https://slashmantools.us/json-regex-devtools/')">🔗 複製連結</button>
+  </div>
+  <script>
+    function shareLink(el,url){navigator.clipboard.writeText(url).then(function(){el.textContent='✓ 已複製';el.classList.add('copied');setTimeout(function(){el.textContent='🔗 複製連結';el.classList.remove('copied');},2000);try{gtag('event','share_copylink')}catch(e){}}).catch(function(){})}
+  </script>
   <div class="tabs"><button class="tab on" data-t="json" data-i18n="t_json">JSON 格式化</button><button class="tab" data-t="re" data-i18n="t_re">正則測試</button></div>
 
   <div class="panel on" id="p-json">
@@ -109,6 +128,27 @@
     <a href="https://slashmantools.us/" data-i18n="home">← 回 AI工具人首頁</a><br>
     <a href="https://slashmantools.us/terms.html" data-i18n="terms">服務說明</a> · <a href="https://slashmantools.us/privacy.html" data-i18n="privacy">隱私權政策</a>
   </div>
+
+  <!-- CROSS-LINK START -->
+  <div class="cross-links" style="max-width:720px;margin:24px auto 0;text-align:center">
+    <div style="font-size:13px;font-weight:700;color:#c7c7f0;margin-bottom:4px">🔗 你可能也會喜歡</div>
+    <div style="font-size:11px;color:#7878a0;margin-bottom:12px">More Tools</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;text-align:left">
+      <a href="https://slashmantools.us/dev-tools/" style="display:block;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-decoration:none;color:inherit;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(99,102,241,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+        <div style="font-size:13px;font-weight:700;color:#c7c7f0">開發者工具 | Dev Tools</div>
+        <div style="font-size:11px;color:#7878a0;margin-top:3px">Base64/URL/JWT/UUID/Hash，本機運算</div>
+      </a>
+      <a href="https://slashmantools.us/ai-prompt-library/" style="display:block;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-decoration:none;color:inherit;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(99,102,241,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+        <div style="font-size:13px;font-weight:700;color:#c7c7f0">AI Prompt 範本庫 | Prompt Library</div>
+        <div style="font-size:11px;color:#7878a0;margin-top:3px">高品質提示詞範本，一鍵複製</div>
+      </a>
+      <a href="https://slashmantools.us/token-cost-calculator/" style="display:block;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-decoration:none;color:inherit;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(99,102,241,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+        <div style="font-size:13px;font-weight:700;color:#c7c7f0">Token 成本計算機 | Token Cost</div>
+        <div style="font-size:11px;color:#7878a0;margin-top:3px">估算 LLM API 費用，比較模型</div>
+      </a>
+    </div>
+  </div>
+  <!-- CROSS-LINK END -->
 </div>
 <script>
   const $=id=>document.getElementById(id);
